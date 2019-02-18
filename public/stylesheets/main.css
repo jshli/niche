@@ -1,0 +1,186 @@
+:root {
+    --main-dark-blue: #2D4B59;
+    --main-green: #55BC90;
+    --box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+/* Components */
+
+#navbarDropdownMenuLink {
+    border-radius: 1000px;
+    background-color: rgba(122,204,242,0.50);
+    color:  rgb(122,204,242);
+    font-weight: bold;
+}
+
+
+#navbar-logo {
+    width: 100%;
+    max-width: 100px
+}
+
+.navbar-light {
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25)
+}
+
+.navbar {
+    position: absolute; 
+    width: 100%;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+/* Buttons */
+
+.btn {
+    border-radius: 100px;
+    color: white !important;
+    box-shadow: var(--box-shadow);
+    background-color: var(--main-dark-blue);
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+}
+
+.nav-btn {
+    background-color: rgba(85, 188, 144, 0.75);
+    box-shadow: none;
+    padding: 0.5rem 2rem !important;
+    margin-left: 1rem;
+}
+
+.add-tracks-btn{
+    margin-top: 5rem;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 1000px;
+    padding: 0;
+    margin: 0 auto;
+    background: var(--main-green)
+}
+
+/* Forms */
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--main-dark-blue);
+    padding: 1rem;
+}
+
+form {
+    margin-top: 2rem;
+}
+
+.form-submit__btn{
+    margin-top: 1rem;
+}
+
+label {
+    color: var(--main-dark-blue);
+    font-weight: bold;
+}
+
+/* Sections */
+.container--grid, .form-grid {
+    display:grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+}
+
+.section--full {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.sign-in--clmn {
+    align-self: center;
+    justify-self: center;
+}
+
+section {
+    padding: 7.5rem 0;
+}
+
+.hero {
+    min-height: 650px;
+    background-color: #E8EDF4;
+}
+
+.img-clmn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Headers */
+h2 {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: var(--main-dark-blue)
+}
+
+/* Cards */
+.course-cards__wrap {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 1rem;
+}
+
+.course-card__category-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__category {
+    border-radius: 100px;
+    background: #f4f4f4;
+    color: #818181;
+    padding: 0.5rem 1rem;
+}
+
+.course-card {
+    box-shadow: var(--box-shadow);
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.card__details-wrap {
+    margin: 2rem;
+}
+
+.card-btn {
+    width: 100%;
+    padding: 1.5rem 0;
+    color:white;
+    border:none;
+    font-weight: bold;
+    background-color:var(--main-dark-blue);
+}
+
+/* Text */
+.error-msg {
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #C44859
+}
+
+/* Images */
+.hero-img {
+    max-width: 75%;
+    margin: 0 auto;
+    justify-self: center;
+
+}

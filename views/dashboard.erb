@@ -1,0 +1,32 @@
+<section>
+    <div class="container">
+        <h2>Welcome back, <%=@user.first_name%></h2>
+        <%if @enrollments.length == 0%>
+            <h3>Hmm, it's feeling a bit lonely here...<i class="far fa-sad-tear"></i></h3>
+            <p>Better your skills by adding a track here (or two?)</p>
+            <a class="btn add-tracks-btn" href="/all_courses"><i class="fas fa-plus"></i></a>
+        <%else%>
+            <h3>My tracks</h3>
+            <div class="course-cards__wrap">
+                <%@enrollments.each do |enrollment|%>
+                <%@enrolled_track = Track.find(enrollment.track_id)%>
+                    <div class="course-card">
+                        <div class="card__details-wrap">
+                            <div class="course-card__category-wrap">
+                            <%@category = Track_Category.find(@enrolled_track.id)%>
+                                <p class="card__category"><%=@category[:name]%>
+                                <p><i class="far fa-clock"></i> <%=@enrolled_track.length%> hours</p>
+                            </div>
+                                <h4><%=@enrolled_track.name%></h4>
+                                <p><%=@enrolled_track.description%></p>
+                                <p>Available <%=@enrolled_track.date_available.strftime("%B, %Y")%></p>
+                            </div>
+                            <button class="card-btn card-btn--enrolled">0% completed</button>
+                        </div>
+                    </div>
+                <%end%>
+            </div>
+        <%end%>
+        <a class="btn add-tracks-btn" href="/all_courses"><i class="fas fa-plus"></i></a>
+    </div>
+</section>

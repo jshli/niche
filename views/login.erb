@@ -1,0 +1,21 @@
+<section class="section--full">
+    <div class="container container--grid">
+        <div class="sign-in--clmn">
+            <img src="/images/3-e1b6245e2a342f5ff15eee4ed7999b1efc740c1a39f65d2fb61a5837a0673f1a.svg" alt="">
+        </div>
+        <div class="sign-in--clmn">
+            <h2>Oh hey there. Welcome back!</h2>
+            <p>Ready to dive back in? Let's get you signed back in.</p>
+            <p>Don't have an account yet? Sign up <a href="/create-account">here.</a></p>
+            <form action="/session" method="post">
+                <label for="">Email Address</label>
+                <input type="email" name="email" required>
+                <label>Password</label>
+                <input type="password" name="password" required>
+                <p class="error-msg"><%=@errors%></p>
+                <button class="btn form-submit__btn">Sign in</button>
+            </form>
+            
+        </div>
+    </div>
+</section>

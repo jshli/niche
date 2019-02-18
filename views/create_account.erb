@@ -1,0 +1,42 @@
+<section class="section--full">
+    <div class="container container--grid">
+        <div class="sign-in--clmn">
+            <img src="/images/3-e1b6245e2a342f5ff15eee4ed7999b1efc740c1a39f65d2fb61a5837a0673f1a.svg" alt="">
+        </div>
+        <div class="sign-in--clmn">
+            <h2>Start learning the skills you need to succeed.</h2>
+            <p>Let’s get you set-up with a free Niche account, so you can start joining tracks you’re interested, and get early access when the platform launches.</p>
+
+            <p>Already have an account? Sign in <a href="/login">here.</a></p>
+
+            <form action="/create-account" method="post">
+                <div class="form-grid">
+                    <div>
+                        <label for="">First Name</label>
+                        <input type="text" name="first_name" required>
+                    </div>
+                    <div>
+                        <label for="">Last Name</label>
+                        <input type="text" name="last_name" required>
+                    </div>
+                </div>
+                <label for="">Email Address</label>
+                <input type="email" name="email" required>
+                <p class="error-msg"> <%=@email_errors%></p>
+                <div class="form-grid">
+                    <div>
+                        <label>Password</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <div>
+                        <label>Confirm password</label>
+                        <input type="password" name="password_confirm" required>
+                    </div>
+                </div>
+                <p class="error-msg"><%=@password_errors%></p>
+                
+                <button class="btn form-submit__btn">Create account</button>
+            </form>
+        </div>
+    </div>
+</section>

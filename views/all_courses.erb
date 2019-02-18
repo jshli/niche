@@ -1,0 +1,32 @@
+<section>
+    <div class="container">
+        <h2>All Tracks</h2>
+        <%@tracks.each do |track|%>
+            <div class="course-cards__wrap">
+                <div class="course-card">
+                    <div class="card__details-wrap">
+                        <div class="course-card__category-wrap">
+                        <%@category = Track_Category.find(track.id)%>
+                            <p class="card__category"><%=@category[:name]%>
+                            <p><i class="far fa-clock"></i> <%=track.length%>  hours</p>
+                        </div>
+                            <h4><%=track.name%></h4>
+                            <p><%=track.description%></p>
+                            <p>Available <%=track.date_available.strftime("%B, %Y")%></p>
+                        </div>
+                        <%if currently_enrolled?(track.id, current_user.id)%>
+                            <button class="card-btn card-btn--enrolled"><i class="fas fa-check"></i> Enrolled</button>
+                        <%else%>
+                            <form action="/<%=track.id%>/enroll" method="post">
+                                <input type="hidden" name="user" value="<%=current_user.id%>">
+                                <input type="hidden" name="track" value="<%=track.id%>">
+                                <button class="card-btn"><i class="fas fa-plus"></i> Enroll</button>
+                            </form>
+                        <%end%>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <%end%>
+    </div>
+</section>
