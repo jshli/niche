@@ -8,6 +8,7 @@
   <!-- Stylsheets -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel='stylesheet' href='/stylesheets/main.css'>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 </head>
@@ -47,11 +48,11 @@
     </div>
   </nav>
   <section class="hero">
-    <div class="container container--grid">
+    <div class="container container--grid2">
         <div class="sign-in--clmn">
-            <h1>Get Better Grades With The Guidance You Wish Your Teacher Would Give.</h1>
-            <p>Niche helps you improve your essay writing by offering you very specific courses based on common feedback from teachers.</p>
-            <p>Be one of the first to join Niche. Launching April 2019.</p>
+            <h1>Get The Guidance You Wish Your Teacher Would Give.</h1>
+            <p>Niche helps you improve your essay writing by offering you very specific tracks based on common feedback from teachers.</p>
+            <p><b>Be one of the first to join Niche. Launching April 2019.</b></p>
             <a href="" class="btn">Signup Now</a>
         </div>
         <div class="img-clmn">
@@ -63,11 +64,126 @@
     <div class="container">
         <h2 class='section__header'>Finally Understand How To Improve Your Essays.</h2>
         <p class="section__subtitle">We transform teacher's broad statements to very specific advice so you can take control of your learning.</p>
+        <div class="track-cards__wrap">
+          <%@tracks.each do |track|%>
+            <div class="track-card">
+                <div class="card__details-wrap">
+                    <div class="track-card__category-wrap">
+                        <%@category = Track_Category.find(track.id)%>
+                        <p class="card__category"><%=@category[:name]%>
+                        <p><i class="far fa-clock"></i> <%=time_conversion(track.sub_lessons.map{|x| x.length}.reduce(:+).to_i)%></p>
+                    </div>
+                    <h4><%=track.name%></h4>
+                    <p><%=track.description%></p>
+                    <p>Available <%=track.date_available.strftime("%B, %Y")%></p>
+                </div>
+                <%if logged_in? && currently_enrolled?(track.id, current_user.id)%>
+                    <button class="card-btn card-btn--enrolled"><i class="fas fa-check"></i> Resume</button>
+                <%elsif logged_in?%>
+                    <form action="/<%=track.id%>/enroll" method="post">
+                        <input type="hidden" name="user" value="<%=current_user.id%>">
+                        <input type="hidden" name="track" value="<%=track.id%>">
+                        <button class="card-btn"><i class="fas fa-plus"></i> Enroll</button>
+                    </form>
+                <%else%>
+                        <a class="card-btn" href="/login"><button class="btn--inherit"><i class="fas fa-plus"></i> Enroll</button></a>
+                <%end%>
+                <div class="modal-overlay">
+                    <div class="modal">
+                        <button class="btn--inherit modal__close-btn"><i class="fas fa-times"></i></button>
+                        <div>
+                            <h3><%=track.name%></h3>
+                            <p><i class="far fa-clock"></i> <%=time_conversion(track.sub_lessons.map{|x| x.length}.reduce(:+).to_i)%></p>
+                            <p><%=track.description%></p>
+                            <p class="card__category"><%=@category[:name]%></p>
+                            <div>
+                                <%if logged_in? && currently_enrolled?(track.id, current_user.id)%>
+                                    <button class="btn card-btn--enrolled"><i class="fas fa-check"></i> Resume</button>
+                                <%elsif logged_in?%>
+                                    <form action="/<%=track.id%>/enroll" method="post">
+                                        <input type="hidden" name="user" value="<%=current_user.id%>">
+                                        <input type="hidden" name="track" value="<%=track.id%>">
+                                        <button class="btn"><i class="fas fa-plus"></i> Enroll</button>
+                                    </form>
+                                <%else%>
+                                    <a href="/login"><button class="btn card-btn--enrolled"><i class="fas fa-check"></i> Resume</button></a>
+                                <%end%>
+                            </div>
+                        </div>
+                        <div class='modal__lesson-list'>
+                            <%track.lessons.each do |lesson|%>
+                                <div class="modal-lessons__wrap">
+                                    <h5>Lesson <%=lesson.order_num%>: <%=lesson.name%></h5>
+                                    <p>Estimated time to completion: <%=lesson.sub_lessons.map{|x| x.length}.reduce(:+)%> minutes</p>
+                                    <%lesson.sub_lessons.each do |sub_lesson|%>
+                                        <p class="modal__sub-lesson-li"><%="#{if sub_lesson.media_type == "Video"
+                                            '<i class="fas fa-video"></i>'
+                                        elsif sub_lesson.media_type == "Exercise"
+                                            '<i class="fas fa-pen"></i>'
+                                        else
+                                            '<i class="fas fa-newspaper"></i>'
+                                        end}  #{lesson.order_num}.#{sub_lesson.order_num}: #{sub_lesson.name} (#{sub_lesson.length} #{sub_lesson.length <= 1 ? "min" : "mins"})"%></p>
+                                    <%end%>
+                                </div>
+                            <%end%>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+          <%end%>
+        </div>
     </div>
   </section>
+  <section>
+    <div class="container"> 
+      <h2 class="section__header">In-Depth, High Quality Content Taught By Experts.</h2>
+      <p class="section__subtitle">Learning through Niche allows you to master the skills you'll need to ace your VCE English, at your own pace. 
+Here's how it works:</p>
+    </div>
+    <div class="container "> 
+    <div class="container--grid2 content-grid">
+      <div class="img-clmn">
+        <img class="how-it-works__img" src="/images/5c5699370464304a47b18244_how-step-2-aa9d08a7873f6137fb875bf1e72e4292eb549f76670498e569383103ae9799ef.png" alt="">
+      </div>
+      <div class="sign-in--clmn">
+        <h4>1. Choose the skills you want to learn</h4>
+        <p>Writing introductions. Essay structuring. Performing under exam conditions. From foundations to advanced techniques, pick from hours worth of courses to learn from!</p>
+      </div>
+    </div>
+    <div class="container--grid2 content-grid">
+      <div class="sign-in--clmn">
+        <h4>2. Complete exercises, get real feedback</h4>
+        <p>We know how important it is to get in-depth feedback. Complete exercises, and get real feedback from English experts that'll help you improve.</p>
+      </div>
+      <div class="img-clmn">
+        <img class="how-it-works__img" src="/images/5c569a0d4ed7967936f0740f_how-step-3-cdf396c1da68deb92f387de5d5e22001820630a09edabb819ad918d8768d912a.png" alt="">
+      </div>
+    </div>
+    <div class="container--grid2 content-grid">
+      <div class="img-clmn">
+        <img class="how-it-works__img" src="/images/5c569ad84ed7967443f0742e_how-step-5-615a85bcf66919966c5bf088c09d6c482f4e421122958f755bab87fea49e9c8b.png" alt="">
+      </div>
+      <div class="sign-in--clmn">
+        <h4>3. Complete courses and become a more confident English student!</h4>
+        <p>With each course you complete and each skill you master, see yourself improve, and become a more confident and competent student.</p>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section class="section--grey">
+    <div class="container container--flex-center">
+      <h2 class="section__header">Don't let what you don't know get in the way</h2>
+      <p class="section__subtitle">Niche is launching limited beta positions in March 2019. Join now and be the first to get an edge.</p>
+      <a class='btn' href="/sign-up">Sign Up</a>
+    </div>
+  </section>
+  <footer>
+    &copy Niche 2019. Powered by Lisa's Study Guides. 
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="/javascripts/application.js"></script>
 </body>
 </html>

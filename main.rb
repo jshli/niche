@@ -9,6 +9,8 @@ require_relative 'models/user'
 require_relative 'models/track'
 require_relative 'models/track_category'
 require_relative 'models/enrollment'
+require_relative 'models/lesson'
+require_relative 'models/sub_lesson'
 
 enable :sessions
 
@@ -25,6 +27,12 @@ helpers do
     end
   end
 
+  def time_conversion(minutes)
+    hours = minutes / 60
+    rest = minutes % 60
+    "#{hours}h #{rest}mins" 
+  end
+
   def currently_enrolled?(track_id, user_id)
     if (Enrollment.where(track_id: track_id).where(user_id: user_id)).length == 0
       false
@@ -35,6 +43,7 @@ helpers do
 end
 
 get '/' do
+  @tracks = Track.all
   erb :index, :layout => false
 end
 
@@ -79,17 +88,25 @@ post '/session' do
 end
 
 get '/dashboard' do
-  @user = User.find(current_user.id)
-  @tracks = Track.all
-  @enrollments = Enrollment.where(user_id: @user.id)
-  @track_category = Track_Category.joins(:tracks)
-  erb :dashboard
+  if logged_in?
+    @user = User.find(current_user.id)
+    @tracks = Track.all
+    @enrollments = Enrollment.where(user_id: @user.id)
+    @track_category = Track_Category.joins(:tracks)
+    erb :dashboard
+  else
+    redirect '/login'
+  end
+  
 end
 
-get '/all_courses' do
-  @user = User.find(current_user.id)
-  @tracks = Track.all
-  erb :all_courses
+get '/all_tracks' do
+  if logged_in?
+    @user = User.find(current_user.id)
+  end
+    @tracks = Track.all
+    @lessons = Lesson.all
+    erb :all_tracks
 end
 
 post '/:id/enroll' do

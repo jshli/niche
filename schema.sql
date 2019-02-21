@@ -27,6 +27,24 @@ CREATE TABLE enrollments (
     completed BOOLEAN
 );
 
+CREATE TABLE lessons (
+    id SERIAL PRIMARY KEY,
+    track_id INTEGER NOT NULL,
+    name VARCHAR(600),
+    description VARCHAR(600),
+    order_num INTEGER,
+    FOREIGN KEY (track_id) REFERENCES tracks (id)
+);
+
+CREATE TABLE sub_lessons (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(600),
+    type VARCHAR(20),
+    lesson_id INTEGER,
+    content TEXT,
+    order_num INTEGER,
+    FOREIGN KEY (lesson_id) REFERENCES lessons (id)
+):
 
 @track = Track.new
 @track.name = "Introductions that stand out"
