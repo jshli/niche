@@ -99,6 +99,18 @@
 
 /* Buttons */
 
+a {
+    color: var(--main-green)
+}
+
+a:hover {
+    color: initial;
+}
+
+button {
+    cursor: pointer;
+}
+
 .btn {
     border-radius: 100px;
     color: white !important;
@@ -109,6 +121,11 @@
     align-items: center;
     justify-content: center;
     display: inline-block;
+    transition: all ease 0.5s;
+}
+
+.btn:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25)
 }
 
 .nav-btn {
@@ -253,6 +270,7 @@ h2 {
 .track-card__category-wrap{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .card__category {
@@ -269,7 +287,12 @@ h2 {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    
+    cursor: pointer;
+    transition: all 0.3s ease
+}
+
+.track-card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25)
 }
 
 .track-card > .card__details-wrap{
