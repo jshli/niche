@@ -263,6 +263,7 @@ h2 {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
     grid-gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .track-card__category-wrap{
