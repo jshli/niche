@@ -6,7 +6,7 @@
             <div class="track-card">
                 <div class="card__details-wrap">
                     <div class="track-card__category-wrap">
-                        <%@category = Track_Category.find(track.id)%>
+                        <%@category = Track_Category.find(track.track_category_id)%>
                         <p class="card__category"><%=@category[:name]%>
                         <p><i class="far fa-clock"></i> <%=time_conversion(track.sub_lessons.map{|x| x.length}.reduce(:+).to_i)%></p>
                     </div>
@@ -43,7 +43,7 @@
                                         <button class="btn"><i class="fas fa-plus"></i> Enroll</button>
                                     </form>
                                 <%else%>
-                                    <a href="/login"><button class="btn card-btn--enrolled"><i class="fas fa-check"></i> Resume</button></a>
+                                    <a href="/login"><button class="btn card-btn--enrolled"><i class="fas fa-check"></i>Enroll</button></a>
                                 <%end%>
                             </div>
                         </div>
