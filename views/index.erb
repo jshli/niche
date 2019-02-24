@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hello World</title>
+  <title>Niche</title>
   
 
   <!-- Stylsheets -->
@@ -62,8 +62,8 @@
   </section>
   <section>
     <div class="container">
-        <h2 class='section__header'>Finally Understand How To Improve Your Essays.</h2>
-        <p class="section__subtitle">We transform teacher's broad statements to very specific advice so you can take control of your learning.</p>
+        <h2 class='section__header'>No more knowledge gaps. No more vague feedback.</h2>
+        <p class="section__subtitle">Each short-course is filled with hours of interactive content and exercises, where you'll get personalised, in-depth feedback from VCE English experts.</p>
         <div class="track-cards__wrap">
           <%@tracks.each do |track|%>
             <div class="track-card">
@@ -71,11 +71,17 @@
                     <div class="track-card__category-wrap">
                         <%@category = Track_Category.find(track.track_category_id)%>
                         <p class="card__category"><%=@category[:name]%>
-                        <p><i class="far fa-clock"></i> <%=time_conversion(track.sub_lessons.map{|x| x.length}.reduce(:+).to_i)%></p>
+                        <%if track.sub_lessons.map{|x| x.length}.reduce(:+) != nil%>
+                          <p class="main--blue"><i class="far fa-clock"></i> <%=time_conversion(track.sub_lessons.map{|x| x.length}.reduce(:+).to_i)%></p>
+                        <%end%>
                     </div>
                     <h4><%=track.name%></h4>
                     <p><%=track.description%></p>
-                    <p>Available <%=track.date_available.strftime("%B, %Y")%></p>
+                    <%if track.date_available != nil%>
+                      <p class="main--grey">Available <%=track.date_available.strftime("%B, %Y")%></p>
+                    <%else%>
+                      <p class="main--grey">Coming soon</p>
+                    <%end%>
                 </div>
                 <%if logged_in? && currently_enrolled?(track.id, current_user.id)%>
                     <button class="card-btn card-btn--enrolled"><i class="fas fa-check"></i> Resume</button>
