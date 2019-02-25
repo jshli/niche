@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="765px" height="413px" viewBox="0 0 765 413" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Pricing" transform="translate(-324.000000, -452.000000)">
+            <g id="Group" transform="translate(323.000000, 450.000000)">
+                <path d="M43.5,10 L43.5,361.5" id="Path-4" stroke="#2D4B59" opacity="0.7" fill-rule="nonzero"></path>
+                <path d="M315.5,88 L316.5,636.5" id="Path-4" stroke="#2D4B59" opacity="0.7" fill-rule="nonzero" transform="translate(316.000000, 362.500000) scale(-1, -1) rotate(90.000000) translate(-316.000000, -362.500000) "></path>
+                <path d="M75,330 L548.46861,39.5310219" id="Path-5" stroke="#2D4B59" stroke-width="3" fill-rule="nonzero"></path>
+                <path d="M75,330 L543.5,330" id="Path-6" stroke="#55BC90" stroke-width="3" fill-rule="nonzero"></path>
+                <text id="$-The-amount-you-spe" transform="translate(10.000000, 186.500000) rotate(-90.000000) translate(-10.000000, -186.500000) " font-family="GorditaBold, Gordita" font-size="16" font-weight="bold" fill="#2D4B59">
+                    <tspan x="-90.4804688" y="192.5">$ The amount you spend</tspan>
+                </text>
+                <text id="How-much-you-want-to" font-family="GorditaBold, Gordita" font-size="16" font-weight="bold" fill="#2D4B59">
+                    <tspan x="198.550781" y="410">How much you want to learn</tspan>
+                </text>
+                <text id="The-Niche-model" font-family="GorditaBold, Gordita" font-size="16" font-weight="bold" fill="#2D4B59">
+                    <tspan x="573" y="334">The Niche model</tspan>
+                </text>
+                <text id="Private-tutoring,-st" font-family="GorditaBold, Gordita" font-size="16" font-weight="bold" fill="#2D4B59">
+                    <tspan x="573" y="16">Private tutoring, study </tspan>
+                    <tspan x="573" y="36">guides and other online </tspan>
+                    <tspan x="573" y="56">courses, </tspan>
+                </text>
+                <text id="The-more-you-want-to" font-family="GorditaRegular, Gordita" font-size="16" font-weight="normal" fill="#2D4B59">
+                    <tspan x="199" y="76">The more you want to learn, </tspan>
+                    <tspan x="199" y="96">the more you pay</tspan>
+                </text>
+                <text id="Learn-as-much-as-you" font-family="GorditaRegular, Gordita" font-size="16" font-weight="normal" line-spacing="24" fill="#55BC90">
+                    <tspan x="352" y="251">Learn as much as you want, </tspan>
+                    <tspan x="352" y="275">when you want, without </tspan>
+                    <tspan x="352" y="299">paying more</tspan>
+                </text>
+                <circle id="Oval-Copy-3" fill="#2D4B59" fill-rule="nonzero" opacity="0.3" cx="549" cy="38" r="10"></circle>
+                <circle id="Oval-Copy" fill="#2D4B59" fill-rule="nonzero" cx="550" cy="38" r="4"></circle>
+                <circle id="Oval" fill="#55BC90" fill-rule="nonzero" cx="544" cy="330" r="4"></circle>
+                <circle id="Oval-Copy-2" fill="#55BC90" fill-rule="nonzero" opacity="0.3" cx="543.5" cy="329.5" r="9.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

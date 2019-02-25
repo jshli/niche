@@ -186,6 +186,10 @@ label {
     grid-gap: 1rem;
 }
 
+.section--light-blue {
+    background: rgba(224, 242, 255, 0.3)
+}
+
 .content-grid {
     grid-gap: 3rem;
     margin-bottom: 5rem;
@@ -354,6 +358,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Images */
+
 .hero-img {
     max-width: 75%;
     margin: 0 auto;
@@ -363,5 +368,11 @@ h1, h2, h3, h4, h5 {
 
 .how-it-works__img {
     max-width: 75%;
+    margin: 0 auto;
+}
+
+.graph-img {
+    margin-top: 5rem;
+    display: block;
     margin: 0 auto;
 }
