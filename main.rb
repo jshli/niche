@@ -1,9 +1,10 @@
      
 require 'sinatra'
-# require 'sinatra/reloader'
-# require 'pry'
+require 'sinatra/reloader'
+require 'pry'
 require 'active_record'
 require 'pg'
+require 'stripe'
 require_relative 'db_config'
 require_relative 'models/user'
 require_relative 'models/track'
@@ -13,6 +14,11 @@ require_relative 'models/lesson'
 require_relative 'models/sub_lesson'
 
 enable :sessions
+
+set :publishable_key, ENV['PUBLISHABLE_KEY']
+set :secret_key, ENV['SECRET_KEY']
+
+Stripe.api_key = settings.secret_key
 
 helpers do 
   def current_user
@@ -120,4 +126,29 @@ end
 delete '/session' do
   session[:user_id] = nil
   redirect '/login'
+end
+
+get '/charge' do
+  erb :charge
+end
+
+post '/charge' do
+  # Amount in cents
+  @amount = 500
+  @user = User.find_by(email: params[:stripeEmail])
+  @user.valid_subscription = true
+  @user.save
+  customer = Stripe::Customer.create({
+    email: params[:stripeEmail],
+    source: params[:stripeToken],
+  })
+
+  charge = Stripe::Charge.create({
+    amount: @amount,
+    description: 'Sinatra Charge',
+    currency: 'aud',
+    customer: customer.id,
+  })
+
+  erb :charge
 end
