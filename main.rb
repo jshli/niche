@@ -58,24 +58,14 @@ get '/create-account' do
 end
 
 post '/create-account' do
-  if params[:password] == params[:password_confirm]
     @user = User.new
     @user.first_name = params[:first_name]
     @user.last_name = params[:last_name]
     @user.email = params[:email]
     @user.password = params[:password]
     @user.avatar = "#{@user.first_name[0].upcase}#{@user.last_name[0].upcase}"
+    @user.valid_subscription = false
     @user.save
-    if @user.save
-      redirect '/login'
-    elsif @errors = @user.errors.messages[:email].first == "has already been taken"
-      @email_errors = "Seems like there's already an account with this email. Are you sure you don't mean to login instead?"
-      erb :create_account
-    end
-  else
-    @password_errors = "Your passwords did not match. Try again!"
-    erb :create_account
-  end
 end
 
 get '/login' do
@@ -134,21 +124,32 @@ end
 
 post '/charge' do
   # Amount in cents
-  @amount = 500
+  @amount = 144
   @user = User.find_by(email: params[:stripeEmail])
-  @user.valid_subscription = true
+  
   @user.save
   customer = Stripe::Customer.create({
     email: params[:stripeEmail],
     source: params[:stripeToken],
   })
-
+  subscription = Stripe::Subscription.create({
+    customer: customer.id,
+    items: [{plan: 'plan_Ed5XMeLHVJFkfa'}],
+    trial_end: 1556632800,
+    
+})
   charge = Stripe::Charge.create({
     amount: @amount,
     description: 'Sinatra Charge',
     currency: 'aud',
     customer: customer.id,
   })
+  @user.valid_subscription = true
+  erb :thank_you
+end
 
-  erb :charge
+get '/api/users' do
+  users = User.all
+  content_type "application/json"
+  users.to_json
 end
