@@ -100,9 +100,7 @@ get '/dashboard' do
   if logged_in?
     @user = User.find(current_user.id)
     if active_subscription?(@user.id)
-      @tracks = Track.all
-      @enrollments = Enrollment.where(user_id: @user.id)
-      @track_category = Track_Category.joins(:tracks)
+      @enrollments = @user.enrollments
       erb :dashboard
     else
       redirect '/activate'
@@ -190,3 +188,4 @@ get '/api/users' do
   content_type "application/json"
   users.to_json
 end
+
