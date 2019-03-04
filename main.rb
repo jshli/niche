@@ -170,8 +170,14 @@ post '/charge' do
     currency: 'aud',
     customer: customer.id,
   })
-  @user.valid_subscription = true
-  @user.save
+  
+  redirect "/thank-you/#{@user.id}"
+end
+
+get "/thank-you/:id" do
+  user = User.find(params[:id])
+  user.valid_subscription = true
+  user.save
   erb :thank_you
 end
 

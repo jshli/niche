@@ -40,6 +40,20 @@
     color: var(--main-dark-blue)
 }
 
+.dropdown-menu form {
+    margin-top: 0;
+}
+
+.dropdown-item{
+    padding: 1rem;
+    transition: all ease 0.3s;
+}
+
+.dropdown-item:hover {
+    color: white;
+    background-color: var(--main-green);
+
+}
 .pricing-card {
     background: white;
     border-radius: 10px;
@@ -379,7 +393,8 @@ footer {
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    transition: all 0.3s ease
+    transition: all 0.3s ease;
+    justify-content: space-between;
 }
 
 .track-card:hover {
