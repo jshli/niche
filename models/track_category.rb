@@ -1,3 +1,3 @@
-class Track_Category < ActiveRecord::Base
-    has_many :lessons
+class TrackCategory < ActiveRecord::Base
+    has_many :tracks
 end

@@ -197,6 +197,7 @@ button {
     margin-top: 5rem;
     height: 3rem;
     width: 3rem;
+    display: flex;
     border-radius: 1000px;
     padding: 0;
     margin: 0 auto;
@@ -353,6 +354,7 @@ footer {
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    justify-content: space-between;
     transition: all 0.3s ease
 }
 
@@ -423,6 +425,10 @@ h3 {
 
 .main--grey {
     color: #818181
+}
+
+.main--italics {
+    font-style: italic;
 }
 
 .main--blue{

@@ -6,13 +6,18 @@
             <div class="track-card">
                 <div class="card__details-wrap">
                     <div class="track-card__category-wrap">
-                        <%@category = Track_Category.find(track.track_category_id)%>
-                        <p class="card__category"><%=@category[:name]%>
-                        <p><i class="far fa-clock"></i> <%=time_conversion(track.sub_lessons.map{|x| x.length}.reduce(:+).to_i)%></p>
+                        <p class="card__category"><%=track.track_category.name%>
+                        <%if track.sub_lessons.map{|x| x.length}.reduce(:+) != nil%>
+                          <p class="main--blue"><i class="far fa-clock"></i> <%=time_conversion(track.sub_lessons.map{|x| x.length}.reduce(:+).to_i)%></p>
+                        <%end%>
                     </div>
                     <h4><%=track.name%></h4>
                     <p><%=track.description%></p>
-                    <p>Available <%=track.date_available.strftime("%B, %Y")%></p>
+                    <%if track.date_available != nil%>
+                      <p class="main--grey">Available <%=track.date_available.strftime("%B, %Y")%></p>
+                    <%else%>
+                      <p class="main--grey">Coming soon</p>
+                    <%end%>
                 </div>
                 <%if logged_in? && currently_enrolled?(track.id, current_user.id)%>
                     <button class="card-btn card-btn--enrolled"><i class="fas fa-check"></i> Resume</button>
@@ -27,12 +32,12 @@
                 <%end%>
                 <div class="modal-overlay">
                     <div class="modal">
-                        <a href="" class="btn--inherit modal__close-btn"><i class="fas fa-times"></i></a>
+                        <button class="btn--inherit modal__close-btn"><i class="fas fa-times"></i></button>
                         <div>
                             <h3><%=track.name%></h3>
                             <p><i class="far fa-clock"></i> <%=time_conversion(track.sub_lessons.map{|x| x.length}.reduce(:+).to_i)%></p>
                             <p><%=track.description%></p>
-                            <p class="card__category"><%=@category[:name]%></p>
+                            <p class="card__category"><%=track.track_category.name%></p>
                             <div>
                                 <%if logged_in? && currently_enrolled?(track.id, current_user.id)%>
                                     <button class="btn card-btn--enrolled"><i class="fas fa-check"></i> Resume</button>
@@ -43,7 +48,7 @@
                                         <button class="btn"><i class="fas fa-plus"></i> Enroll</button>
                                     </form>
                                 <%else%>
-                                    <a href="/login"><button class="btn card-btn--enrolled"><i class="fas fa-check"></i>Enroll</button></a>
+                                    <a href="/login"><button class="btn card-btn--enrolled"><i class="fas fa-plus"></i> Enroll</button></a>
                                 <%end%>
                             </div>
                         </div>
@@ -66,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-            </div>     
+            </div>
         <%end%>
         </div> 
     </div>
