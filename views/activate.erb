@@ -1,0 +1,21 @@
+<section class="section--full">
+    <div class="container container--grid2">
+        <div class="sign-in--clmn">
+            <img src="/images/3-e1b6245e2a342f5ff15eee4ed7999b1efc740c1a39f65d2fb61a5837a0673f1a.svg" alt="">
+        </div>
+        <div class="sign-in--clmn">
+            <h2>Oh hey, welcome back!</h2>
+            <p>We just need to activate your account with a valid credit card, and you'll be on your way in no time!</p>
+            <p>Don't worry, we won't charge anything today either.</a></p>
+            <form action="/charge" method="post" class="payment">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="<%= settings.publishable_key %>"
+                        data-description="Nice Subscription"
+                        data-amount="2900"
+                        data-locale="auto"></script>
+            </form>
+            <img class='stripe-img' src="/images/stripe-payment-logo.png" alt="" srcset="">
+
+        </div>
+    </div>
+</section>

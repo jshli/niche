@@ -33,6 +33,15 @@ helpers do
     end
   end
 
+  def active_subscription?(user_id)
+    user = User.find(user_id)
+    if user.valid_subscription
+      true
+    else
+      false
+    end
+  end
+
   def time_conversion(minutes)
     hours = minutes / 60
     rest = minutes % 60
@@ -58,24 +67,15 @@ get '/create-account' do
 end
 
 post '/create-account' do
-  if params[:password] == params[:password_confirm]
     @user = User.new
     @user.first_name = params[:first_name]
     @user.last_name = params[:last_name]
     @user.email = params[:email]
     @user.password = params[:password]
     @user.avatar = "#{@user.first_name[0].upcase}#{@user.last_name[0].upcase}"
+    @user.phone_number = params[:phone_number]
+    @user.valid_subscription = false
     @user.save
-    if @user.save
-      redirect '/login'
-    elsif @errors = @user.errors.messages[:email].first == "has already been taken"
-      @email_errors = "Seems like there's already an account with this email. Are you sure you don't mean to login instead?"
-      erb :create_account
-    end
-  else
-    @password_errors = "Your passwords did not match. Try again!"
-    erb :create_account
-  end
 end
 
 get '/login' do
@@ -84,9 +84,12 @@ end
 
 post '/session' do
   user = User.find_by(email: params[:email])
-  if user && user.authenticate(params[:password])
+  if user && user.authenticate(params[:password]) && active_subscription?(user.id)
     session[:user_id] = user.id
     redirect'/dashboard'
+  elsif user && user.authenticate(params[:password])
+    session[:user_id] = user.id
+    redirect '/activate'
   else
     @errors = "Wrong password or email. Try again?"
     erb :login
@@ -96,14 +99,17 @@ end
 get '/dashboard' do
   if logged_in?
     @user = User.find(current_user.id)
-    @tracks = Track.all
-    @enrollments = Enrollment.where(user_id: @user.id)
-    @track_category = Track_Category.joins(:tracks)
-    erb :dashboard
+    if active_subscription?(@user.id)
+      @tracks = Track.all
+      @enrollments = Enrollment.where(user_id: @user.id)
+      @track_category = Track_Category.joins(:tracks)
+      erb :dashboard
+    else
+      redirect '/activate'
+    end
   else
     redirect '/login'
   end
-  
 end
 
 get '/all_tracks' do
@@ -116,11 +122,28 @@ get '/all_tracks' do
 end
 
 post '/:id/enroll' do
-  enrollment = Enrollment.new
-  enrollment.user_id = params[:user].to_i
-  enrollment.track_id = params[:track].to_i
-  enrollment.save
-  redirect '/dashboard'
+  if logged_in?
+    if active_subscription?(current_user.id)
+      enrollment = Enrollment.new
+      enrollment.user_id = params[:user].to_i
+      enrollment.track_id = params[:track].to_i
+      enrollment.save
+      redirect '/dashboard'
+    else
+      redirect '/activate'
+    end
+  else
+    redirect '/login'
+  end
+end
+
+get '/activate' do
+  if logged_in?
+    @user = current_user
+    erb :activate
+  else
+    redirect '/create-account'
+  end
 end
 
 delete '/session' do
@@ -128,27 +151,42 @@ delete '/session' do
   redirect '/login'
 end
 
-get '/charge' do
-  erb :charge
-end
-
 post '/charge' do
   # Amount in cents
-  @amount = 500
+  @amount = 2900
   @user = User.find_by(email: params[:stripeEmail])
-  @user.valid_subscription = true
-  @user.save
+  
   customer = Stripe::Customer.create({
     email: params[:stripeEmail],
     source: params[:stripeToken],
   })
-
+  subscription = Stripe::Subscription.create({
+    customer: customer.id,
+    items: [{plan: 'plan_Ed5XMeLHVJFkfa'}],
+    trial_end: 1556632800,
+    
+})
   charge = Stripe::Charge.create({
     amount: @amount,
     description: 'Sinatra Charge',
     currency: 'aud',
     customer: customer.id,
   })
+  @user.valid_subscription = true
+  @user.save
+  erb :thank_you
+end
 
-  erb :charge
+post '/webhook/activate/' do
+  event_json = JSON.parse(request.body.read)
+end
+
+error Stripe::CardError do
+  env['sinatra.error'].message
+end
+
+get '/api/users' do
+  users = User.all
+  content_type "application/json"
+  users.to_json
 end
