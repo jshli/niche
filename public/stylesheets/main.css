@@ -462,7 +462,7 @@ h3 {
     .graph-img {
         width: 100%;
         position: sticky;
-        top: 0;
+        top: 10px;
     }
 
     .section--full {
