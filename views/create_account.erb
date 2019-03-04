@@ -9,21 +9,20 @@
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                                <p>We’re super excited to welcome you to Niche! We’re not quite ready yet, but you can create a free account and start securing your spot in the courses you’re most interested in.</p>
-                                <h4>Before we start!</h4>
-                                <p>We will be needing credit-card details to complete this account, but we won’t charge you until 2 weeks after the launch of Niche! We just ask for credit card details to make sure you’re not a robot.</p>
-                                <button id="start-signup-next" class="btn btn--secondary">Let's go!  <i class="fas fa-chevron-right"></i></button>
-                            </div>
+                            <p>We’re super excited to welcome you to Niche! We’re not quite ready yet, but you can create an account and start securing your spot in the courses you’re most interested in.</p>
+                            <h4>Before we start!</h4>
+                            <p>We will be needing credit-card details to complete this account, but we won’t charge you until 2 weeks after the launch of Niche! We just ask for credit card details to make sure you’re not a robot.</p>
+                            <button id="start-signup-next" class="btn btn--secondary">Let's go!  <i class="fas fa-chevron-right"></i></button>
+                        </div>
                         <div class="carousel-item">
                             <h3>Step 1 of 3 - Getting ready</h3>
                             <div class="pricing-card">
                                 <div class="pricing-wrap">
-                                    <h4>24</h4>
+                                    <h4>29</h4>
                                     <p class="main--grey">/month</p>
                                 </div>
-                                <p class="main--grey">paid yearly</p>
                                 <p>Develop all the skills you need, with unlimited access to all courses (current and upcoming).</p>
-                                <p class="main--blue">Sign-up now, and get 50% off for access until the end of 2019.</p>
+    
                                 <input class="pricing-card__radio-input" type="radio" checked>
                             </div>
                             <div class="carousel__btn-wrap">
@@ -82,7 +81,7 @@
             </form>
                         <div class="carousel-item">
                             <h3>Step 3 of 3 - Payment profile</h3>
-                            <p>Press the button below to enter your credit card details. Even though you may see a price, you will not be charged anything today.</p>
+                            <p>Press the button below to enter your credit card details. Even though you may see a price, you will not be charged anything today, and we will notify.  You will only be charged 2 weeks after Niche launches, and we'll let you know well in advance!</p>
                             <form action="/charge" method="post" class="payment">
                                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                         data-key="<%= settings.publishable_key %>"

@@ -80,9 +80,6 @@
     align-items: flex-end;
 }
 
-input::placeholder {
-    font-style: italic;
-}
 
 /* Modal */
 
@@ -233,7 +230,24 @@ input {
     border: none;
     border-bottom: 1px solid var(--main-dark-blue);
     padding: 1rem;
+    transition: all ease 0.3s
 }
+
+input::placeholder {
+    font-style: italic;
+}
+
+input:focus {
+    outline: none;
+    transform: scale(1.03);
+    box-shadow: var(--box-shadow);
+    border-bottom: 1px solid var(--main-green)
+}
+
+input:focus-visible {
+    outline: 1px solid grey;
+}
+
 
 form {
     margin-top: 2rem;
@@ -300,6 +314,7 @@ section {
 .hero {
     min-height: 650px;
     background-color: #FBFAF6;
+    position: relative;
 }
 
 .img-clmn {
@@ -321,6 +336,13 @@ footer {
     background-color: #202020;
     color: white;
     text-align: center;
+}
+
+.hero-grid {
+    display:grid;
+    grid-template-columns: 60% auto;
+    grid-column-gap: 2rem;
+    max-height: 80%;
 }
 
 
@@ -386,6 +408,11 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.card-btn:hover{
+    color: white;
+    text-decoration: none;
 }
 
 .card-btn--enrolled{
@@ -456,6 +483,19 @@ h3 {
     max-width: 5rem;
 }
 
+.mockups{
+    position: absolute;
+    bottom: -3rem;
+    z-index: 2;
+    right: 0;
+}
+
+.triangle {
+    position: absolute;
+    bottom: 0; 
+    width: 100%
+}
+
 
 /* Responsiveness */
 
@@ -465,6 +505,9 @@ h3 {
         position: sticky;
         top: 10px;
     }
+    .mockups{
+        display: none;
+    }
 
     .section--full {
         height: 100vh;
@@ -473,7 +516,6 @@ h3 {
     }
     .sign-in--clmn {
         max-height: 100%;
-        overflow: scroll;
     }
 
     .track-cards__wrap{
@@ -507,6 +549,10 @@ h3 {
         grid-template-columns: repeat(2, 1fr);
         grid-row-gap: 1.5rem;
     }
+    .mockups{
+        display: none;
+    }
+
 
 }
 
@@ -524,6 +570,15 @@ h3 {
         grid-template-columns: none;
     }
 
+    .hero-grid {
+        grid-template-columns: none;
+    }
+
+
+    .mockups{
+        display: none;
+    }
+
     section{
         padding: 5rem 1rem;
 
@@ -533,6 +588,7 @@ h3 {
         max-width: 100%;
         margin-bottom: 1rem;
     }
+
 
     .form-grid {
         grid-auto-flow: row;
@@ -548,9 +604,7 @@ h3 {
         padding-bottom: 8rem;
     }
     
-    .hero img {
-        margin-top: 2rem;
-    }
+    
 
     .track-cards__wrap{
         grid-template-columns: none;
