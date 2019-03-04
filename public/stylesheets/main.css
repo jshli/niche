@@ -472,6 +472,7 @@ h3 {
     
 } */
 
+/* Mobile phones */
 @media all and (max-width: 479px) { 
     .section--full {
         height: auto;
