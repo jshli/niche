@@ -46,14 +46,5 @@ CREATE TABLE sub_lessons (
     FOREIGN KEY (lesson_id) REFERENCES lessons (id)
 ):
 
-@track = Track.new
-@track.name = "Introductions that stand out"
-@track.length = 3
-@track.date_available = "2019-04-01"
-@track.track_category_id = 1
-@track.description = "Learn different introduction styles, prepare your own template, and successfully tackle any essay topic from your very first sentence"
-@track.save
 
-@track_category = Track_Category.new
-@track_category.name = "Fundamentals"
-@trac.save
+ALTER TABLE users ADD COLUMN phone_number VARCHAR(20);

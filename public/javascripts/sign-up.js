@@ -3,8 +3,9 @@ const choosePricingNextBtn = document.querySelector('#choose-pricing-next');
 const createAccountBtn = document.querySelector('#create-account-btn');
 const carouselPrevBtn = document.querySelector('.carousel-control-prev');
 const carouselNextBtn = document.querySelector('.carousel-control-next');
-const createAccountForm = document.querySelector('#create-account-form')
-
+const createAccountForm = document.querySelector('#create-account-form');
+const carouselBackLinks = document.querySelectorAll('.back-link');
+const passwordInput = document.querySelector('input[name="password"]');
 
 const carouselNext = event => {
     event.preventDefault();
@@ -14,7 +15,6 @@ const carouselNext = event => {
 async function catchErrors() {
     let formData = new FormData(createAccountForm);
     const emailInput = document.querySelector('input[name="email"]');
-    const passwordInput = document.querySelector('input[name="password"]');
     const passwordConfirm = document.querySelector('input[name="password_confirm"]');
     const emailError = document.querySelector('#email-error');
     const passwordError = document.querySelector('#password-error');
@@ -53,7 +53,17 @@ function createAccount(event) {
     catchErrors();
  }
 
+ const carouselBack = event => {
+     event.preventDefault();
+     carouselPrevBtn.click();
+ }
 
+const passwordStrength = event => {
+    console.log('hi')
+}
+
+passwordInput.addEventListener('keyup', passwordStrength);
 createAccountBtn.addEventListener('click', createAccount);
 startSignupNextBtn.addEventListener('click', carouselNext);
 choosePricingNextBtn.addEventListener('click', carouselNext);
+carouselBackLinks.forEach(el => el.addEventListener('click', carouselBack));

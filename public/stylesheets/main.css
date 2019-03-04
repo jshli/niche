@@ -72,7 +72,15 @@
     opacity: 0;
 }
 
+.carousel__btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
 
+input::placeholder {
+    font-style: italic;
+}
 
 /* Modal */
 
@@ -204,6 +212,12 @@ button {
 
 button > * {
     pointer-events: none;
+}
+
+.back-link {
+    border: none;
+    background: none;
+    color: var(--main-dark-blue);
 }
 
 /* Forms */
@@ -433,4 +447,36 @@ h3 {
     margin-top: 5rem;
     display: block;
     margin: 0 auto;
+}
+
+.stripe-img {
+    max-width: 5rem;
+}
+
+
+/* Responsiveness */
+
+
+@media all and (min-width: 768px) and (max-width: 959px) {
+    
+}
+/* @media all and (min-width: 480px) and (max-width: 767px){ ... } */
+/* 
+@media all and (max-width: 599px) { 
+    
+} */
+
+@media all and (max-width: 479px) { 
+    .section--full {
+        height: auto;
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+    }
+    .container--grid2 {
+        grid-auto-flow: row;
+    }
+
+    section {
+        padding: 1rem;
+    }
 }

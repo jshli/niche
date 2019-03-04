@@ -15,7 +15,6 @@
                                 <button id="start-signup-next" class="btn btn--secondary">Let's go!  <i class="fas fa-chevron-right"></i></button>
                             </div>
                         <div class="carousel-item">
-                            <p>We’re super excited to welcome you to Niche! We’re not quite ready yet, but you can create a free account and start securing your spot in the courses you’re most interested in.</p>
                             <h3>Step 1 of 3 - Getting ready</h3>
                             <div class="pricing-card">
                                 <div class="pricing-wrap">
@@ -27,27 +26,47 @@
                                 <p class="main--blue">Sign-up now, and get 50% off for access until the end of 2019.</p>
                                 <input class="pricing-card__radio-input" type="radio" checked>
                             </div>
-                            <button id="choose-pricing-next" class="btn btn--secondary">Next <i class="fas fa-chevron-right"></i></button>
+                            <div class="carousel__btn-wrap">
+                                <button class="back-link"><i class="fas fa-chevron-left"></i> Back</button>
+                                <button id="choose-pricing-next" class="btn btn--secondary">Next <i class="fas fa-chevron-right"></i></button>
+                            </div>
                         </div>
                         <div class="carousel-item">
                             <h3>Step 2 of 3 - Tell us a bit about yourself</h3>
+                            <p>Use the form below to create your account! All fields are required.</p>
                             <div class="form-grid">
                                 <div>
                                     <label for="">First Name</label>
-                                    <input type="text" name="first_name" required>
+                                    <input type="text" name="first_name" placeholder="Jane" required>
                                 </div>
                                 <div>
                                     <label for="">Last Name</label>
-                                    <input type="text" name="last_name" required>
+                                    <input type="text" name="last_name" placeholder="Smith" required>
                                 </div>
                             </div>
-                            <label for="">Email Address</label>
-                            <input type="email" name="email" required>
-                            <p id="email-error" class="error-msg"></p>
+                            <div class="form-grid">
+                                <div>
+                                    <label for="">Email Address</label>
+                                    <input type="email" name="email" placeholder="jane.smith@gmail.com" required>
+                                    <p id="email-error" class="error-msg"></p>
+                                </div>
+                                <div>
+                                    <label for="">Phone Number</label>
+                                    <input type="tel" name="phone_number" placeholder="0412345678" required>
+                                    <p id="email-error" class="error-msg"></p>
+                                </div>
+                            </div>
                             <div class="form-grid">
                                 <div>
                                     <label>Password</label>
                                     <input type="password" name="password" required>
+                                    <div class="password-strength-wrap">
+                                        <div class="password-strength-meter weak"></div>
+                                        <div class="password-strength-meter medium" ></div>
+                                        <div class="password-strength-meter strong"></div>
+                                        <p class="password-strength-label"></p>
+                                    </div>
+
                                 </div>
                                 <div>
                                     <label>Confirm password</label>
@@ -55,20 +74,23 @@
                                 </div>
                             </div>
                             <p id="password-error" class="error-msg"></p>
-                            
-                            <button id="create-account-btn" class="btn form-submit__btn">Create account</button>
+                            <div class="carousel__btn-wrap" >
+                                <button class="back-link"><i class="fas fa-chevron-left"></i> Back</button>
+                                <button id="create-account-btn" class="btn form-submit__btn">Create account</button>
+                            </div>
                         </div>
             </form>
                         <div class="carousel-item">
                             <h3>Step 3 of 3 - Payment profile</h3>
+                            <p>Press the button below to enter your credit card details. Even though you may see a price, you will not be charged anything today.</p>
                             <form action="/charge" method="post" class="payment">
                                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                         data-key="<%= settings.publishable_key %>"
-                                        data-description="Just a reminder - you will not be charged anything today, and we will ask you for permission before charging you when we officially launch."
-                                        data-amount="14400"
+                                        data-description="Nice Subscription"
+                                        data-amount="2900"
                                         data-locale="auto"></script>
                             </form>
-                            <img src="/images/stripe-payment-logo.png" alt="" srcset="">
+                            <img class='stripe-img' src="/images/stripe-payment-logo.png" alt="" srcset="">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
