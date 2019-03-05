@@ -1,10 +1,11 @@
      
 require 'sinatra'
-# require 'sinatra/reloader'
-# require 'pry'
+require 'sinatra/reloader'
+require 'pry'
 require 'active_record'
 require 'pg'
 require 'stripe'
+require 'mailchimp'
 require_relative 'db_config'
 require_relative 'models/user'
 require_relative 'models/track'
@@ -18,7 +19,8 @@ enable :sessions
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
 
-Stripe.api_key = settings.secret_key
+set :mailchimp_api_key, ENV['MAILCHIMP_API_KEY']
+
 
 helpers do 
   def current_user
@@ -67,16 +69,26 @@ get '/create-account' do
 end
 
 post '/create-account' do
+  if params[:password] == params[:password_confirm]
     @user = User.new
     @user.first_name = params[:first_name]
     @user.last_name = params[:last_name]
     @user.email = params[:email]
     @user.password = params[:password]
     @user.avatar = "#{@user.first_name[0].upcase}#{@user.last_name[0].upcase}"
-    @user.phone_number = params[:phone_number]
-    @user.valid_subscription = false
     @user.save
+    if @user.save
+      redirect '/thank_you'
+    elsif @errors = @user.errors.messages[:email].first == "has already been taken"
+      @email_errors = "Seems like there's already an account with this email. Are you sure you don't mean to login instead?"
+      erb :create_account
+    end
+  else
+    @password_errors = "Your passwords did not match. Try again!"
+    erb :create_account
+  end
 end
+
 
 get '/login' do
   erb :login
@@ -88,12 +100,9 @@ end
 
 post '/session' do
   user = User.find_by(email: params[:email])
-  if user && user.authenticate(params[:password]) && active_subscription?(user.id)
+  if user && user.authenticate(params[:password])
     session[:user_id] = user.id
     redirect'/dashboard'
-  elsif user && user.authenticate(params[:password])
-    session[:user_id] = user.id
-    redirect '/activate'
   else
     @errors = "Wrong password or email. Try again?"
     erb :login
@@ -103,12 +112,8 @@ end
 get '/dashboard' do
   if logged_in?
     @user = User.find(current_user.id)
-    if active_subscription?(@user.id)
-      @enrollments = @user.enrollments
-      erb :dashboard
-    else
-      redirect '/activate'
-    end
+    @enrollments = @user.enrollments
+    erb :dashboard
   else
     redirect '/login'
   end
@@ -125,15 +130,11 @@ end
 
 post '/:id/enroll' do
   if logged_in?
-    if active_subscription?(current_user.id)
-      enrollment = Enrollment.new
-      enrollment.user_id = params[:user].to_i
-      enrollment.track_id = params[:track].to_i
-      enrollment.save
-      redirect '/dashboard'
-    else
-      redirect '/activate'
-    end
+    enrollment = Enrollment.new
+    enrollment.user_id = params[:user].to_i
+    enrollment.track_id = params[:track].to_i
+    enrollment.save
+    redirect '/dashboard'
   else
     redirect '/login'
   end
@@ -157,7 +158,7 @@ post '/charge' do
   # Amount in cents
   @amount = 2900
   @user = User.find_by(email: params[:stripeEmail])
-  
+
   customer = Stripe::Customer.create({
     email: params[:stripeEmail],
     source: params[:stripeToken],

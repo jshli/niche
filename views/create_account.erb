@@ -5,109 +5,45 @@
         </div>
         <div class="sign-in--clmn">
             <h2>Start learning the skills you need to succeed.</h2>
-            <form id="create-account-form" action="/create-account" method="post">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <p>We’re super excited to welcome you to Niche! We’re not quite ready yet, but you can create an account and start securing your spot in the courses you’re most interested in.</p>
-                            <h4>Before we start!</h4>
-                            <p>We will be needing credit-card details to complete this account, but we won’t charge you until 2 weeks after the launch of Niche! We just ask for credit card details to make sure you’re not a robot.</p>
-                            <button id="start-signup-next" class="btn btn--secondary">Let's go!  <i class="fas fa-chevron-right"></i></button>
-                        </div>
-                        <div class="carousel-item">
-                            <h3>Step 1 of 3 - Getting ready</h3>
-                            <div class="pricing-card">
-                                <div class="pricing-wrap">
-                                    <h4>29</h4>
-                                    <p class="main--grey">/month</p>
-                                </div>
-                                <p>Develop all the skills you need, with unlimited access to all courses (with new courses released each month). You will not be charged until after Niche launches.</p>
-    
-                                <input class="pricing-card__radio-input" type="radio" checked>
-                            </div>
-                            <div class="carousel__btn-wrap">
-                                <button class="back-link"><i class="fas fa-chevron-left"></i> Back</button>
-                                <button id="choose-pricing-next" class="btn btn--secondary">Next <i class="fas fa-chevron-right"></i></button>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <h3>Step 2 of 3 - Tell us a bit about yourself</h3>
-                            <p>Use the form below to create your account! All fields are required.</p>
-                            <div class="form-grid">
-                                <div>
-                                    <label for="">First Name</label>
-                                    <input type="text" name="first_name" placeholder="Jane" required>
-                                </div>
-                                <div>
-                                    <label for="">Last Name</label>
-                                    <input type="text" name="last_name" placeholder="Smith" required>
-                                </div>
-                            </div>
-                            <div class="form-grid">
-                                <div>
-                                    <label for="">Email Address</label>
-                                    <input type="email" name="email" placeholder="jane.smith@gmail.com" required>
-                                    <p id="email-error" class="error-msg"></p>
-                                </div>
-                                <div>
-                                    <label for="">Phone Number</label>
-                                    <input type="tel" name="phone_number" placeholder="0412345678" required>
-                                    <p id="email-error" class="error-msg"></p>
-                                </div>
-                            </div>
-                            <div class="form-grid">
-                                <div>
-                                    <label>Password</label>
-                                    <input type="password" name="password" required>
-                                    <div class="password-strength-wrap">
-                                        <div class="password-strength-meter weak"></div>
-                                        <div class="password-strength-meter medium" ></div>
-                                        <div class="password-strength-meter strong"></div>
-                                        <p class="password-strength-label"></p>
-                                    </div>
+            <p>Let’s get you set-up with a free Niche account, so you can start joining tracks you’re interested, and get early access when the platform launches.</p>
+            <p>Already have an account? Sign in <a href="/login">here.</a></p>
 
-                                </div>
-                                <div>
-                                    <label>Confirm password</label>
-                                    <input type="password" name="password_confirm" required>
-                                </div>
-                            </div>
-                            <p id="password-error" class="error-msg"></p>
-                             <p id="form-error" class="error-msg"></p>
-                            <div class="carousel__btn-wrap" >
-                                <button class="back-link"><i class="fas fa-chevron-left"></i> Back</button>
-                                <button id="create-account-btn" class="btn form-submit__btn">Create account</button>
-                            </div>
-                        </div>
-            </form>
-                        <div class="carousel-item">
-                            <h3>Step 3 of 3 - Payment profile</h3>
-                            <p>Press the button below to enter your credit card details. You will only be charged 2 weeks after Niche launches, and we'll be sure to inform you before your first charge.</p>
-                            <p><b>Note:</b> Use the same email as you did when you signed up </p>
-                            <form action="/charge" method="post" class="payment">
-                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                        data-key="<%= settings.publishable_key %>"
-                                        data-description="Niche Subscription"
-                                        data-amount="2900"
-                                        data-locale="auto"></script>
-                            </form>
-                            <img class='stripe-img' src="/images/stripe-payment-logo.png" alt="" srcset="">
-                            <p><b>30-day money back guarantee.</b></p>
-                            <p>Your card details are encrypted and kept confidential.</p>
-                        </div>
+            <form action="/create-account" method="post">
+                <div class="form-grid">
+                    <div>
+                        <label for="">First Name</label>
+                        <input type="text" name="first_name" required>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                    <div>
+                        <label for="">Last Name</label>
+                        <input type="text" name="last_name" required>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div>
+                        <label for="">Email Address</label>
+                        <input type="email" name="email" required>
+                        <p class="error-msg"> <%=@email_errors%></p>
+                    </div>
+                    <div>
+                        <label for="">Phone Number</label>
+                        <input type="tel" name="phone_number" required>
+                    </div>
                 </div>
                 
-         <p>Already have an account? Sign in <a href="/login">here.</a></p>
+                <div class="form-grid">
+                    <div>
+                        <label>Password</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <div>
+                        <label>Confirm password</label>
+                        <input type="password" name="password_confirm" required>
+                    </div>
+                </div>
+                <p class="error-msg"><%=@password_errors%></p>
+                
+                <button class="btn form-submit__btn">Create account</button>
+            </form>
         </div>
     </div>
-</section>
-<script src="/javascripts/sign-up.js"></script>

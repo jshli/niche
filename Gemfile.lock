@@ -16,10 +16,15 @@ GEM
     bcrypt (3.1.12)
     concurrent-ruby (1.1.4)
     connection_pool (2.2.2)
+    excon (0.62.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
+    json (2.2.0)
+    mailchimp-api (2.0.6)
+      excon (>= 0.16.0)
+      json (>= 1.7.7)
     minitest (5.11.3)
     multipart-post (2.0.0)
     mustermann (1.0.3)
@@ -48,6 +53,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bcrypt
+  mailchimp-api
   pg
   sinatra
   stripe
