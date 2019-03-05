@@ -168,12 +168,6 @@ post '/charge' do
     trial_end: 1556632800,
     
 })
-  charge = Stripe::Charge.create({
-    amount: @amount,
-    description: 'Sinatra Charge',
-    currency: 'aud',
-    customer: customer.id,
-  })
   
   redirect "/thank-you/#{@user.id}"
 end
