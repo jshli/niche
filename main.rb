@@ -1,7 +1,7 @@
      
 require 'sinatra'
 # require 'sinatra/reloader'
-require 'pry'
+# require 'pry'
 require 'active_record'
 require 'pg'
 require 'stripe'
