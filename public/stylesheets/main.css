@@ -100,6 +100,7 @@
 }
 
 
+
 /* Modal */
 
 
@@ -304,6 +305,10 @@ label {
     align-items: center;
 }
 
+.container--text-center {
+    text-align:center;
+}
+
 .container--grid3{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -355,6 +360,18 @@ footer {
     background-color: #202020;
     color: white;
     text-align: center;
+}
+
+.footer__nav-link-wrap {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.footer__nav-link {
+    padding: 1rem 2rem;
+    margin: 0 1rem;
+    color: white;
 }
 
 .hero-grid {
