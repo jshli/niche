@@ -197,3 +197,7 @@ get '/api/users' do
   users.to_json
 end
 
+not_found do
+  status 404
+  erb :oops
+end
