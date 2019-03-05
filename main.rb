@@ -164,7 +164,7 @@ post '/charge' do
   })
   subscription = Stripe::Subscription.create({
     customer: customer.id,
-    items: [{plan: 'plan_Ed5XMeLHVJFkfa'}],
+    items: [{plan: 'plan_EdpHrqZ8Ymc9TQ'}],
     trial_end: 1556632800,
     
 })
