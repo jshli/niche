@@ -15,28 +15,41 @@ const carouselNext = event => {
 async function catchErrors() {
     let formData = new FormData(createAccountForm);
     const emailInput = document.querySelector('input[name="email"]');
-    const passwordConfirm = document.querySelector('input[name="password_confirm"]');
+    const passwordConfirmInput = document.querySelector('input[name="password_confirm"]');
     const emailError = document.querySelector('#email-error');
     const passwordError = document.querySelector('#password-error');
-    let isError = false;
+    const firstNameInput = document.querySelector('input[name="first_name"]');
+    const lastNameInput = document.querySelector('input[name="last_name"]');
+    const phoneInput = document.querySelector('input[name="last_name"]');
+    const formError = document.querySelector('#form-error');
+    let hasError = false;
     let url = `/api/users`;
     let createAccount = `/create-account?`
-    const showEmailError = () => {
-        emailError.textContent = "Hmm, it looks like this account already exists. Are you sure you didn't mean to login?"
+
+    const inputFilled = input => {
+        if (input.value.length === 0){
+            return false
+        } else {
+            return true;
+        }
     }
-    if (passwordInput.value !== passwordConfirm.value) {
+    if (!inputFilled(emailInput) || !inputFilled(passwordInput) || !inputFilled(firstNameInput) || !inputFilled(lastNameInput) || !inputFilled(phoneInput)||!inputFilled(passwordConfirmInput)){
+        hasError = true;
+        formError.textContent = "Have you filled in all form fields?"
+    }
+    if (passwordInput.value !== passwordConfirmInput.value) {
         passwordError.textContent = "Your passwords don't match. Try again!";
-        isError = true;
+        hasError = true;
     }
     const res = await fetch(url).then(res => res.json()).then(res => {
         res.forEach(function(user){ 
             if (user.email === emailInput.value){
-                showEmailError();
-                isError = true;
+                emailError.textContent = "Hmm, it looks like this account already exists. Are you sure you didn't mean to login?";
+                hasError = true;
             }
         })    
     })
-    if (!isError) {
+    if (!hasError) {
         fetch(createAccount,{
             method: 'POST',
             body: formData,
@@ -59,7 +72,7 @@ function createAccount(event) {
  }
 
 const passwordStrength = event => {
-    console.log('hi')
+
 }
 
 passwordInput.addEventListener('keyup', passwordStrength);

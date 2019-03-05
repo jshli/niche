@@ -6,7 +6,8 @@
         <div class="sign-in--clmn">
             <h2>Oh hey, welcome back!</h2>
             <p>We just need to activate your account with a valid credit card, and you'll be on your way in no time!</p>
-            <p>Don't worry, we won't charge anything today either.</a></p>
+            <p>Press the button below to enter your credit card details. You will only be charged 2 weeks after Niche launches, and we'll be sure to inform you before your first charge.</p>
+            <p><b>Note:</b> Make sure you use the same email as you did when you signed up.</p>
             <form action="/charge" method="post" class="payment">
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                         data-key="<%= settings.publishable_key %>"
@@ -15,6 +16,8 @@
                         data-locale="auto"></script>
             </form>
             <img class='stripe-img' src="/images/stripe-payment-logo.png" alt="" srcset="">
+            <p><b>30-day money back guarantee.</b></p>
+            <p>Your card details are encrypted and kept confidential.</p>
 
         </div>
     </div>

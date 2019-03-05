@@ -21,7 +21,7 @@
                                     <h4>29</h4>
                                     <p class="main--grey">/month</p>
                                 </div>
-                                <p>Develop all the skills you need, with unlimited access to all courses (current and upcoming).</p>
+                                <p>Develop all the skills you need, with unlimited access to all courses (with new courses released each month). You will not be charged until after Niche launches.</p>
     
                                 <input class="pricing-card__radio-input" type="radio" checked>
                             </div>
@@ -73,6 +73,7 @@
                                 </div>
                             </div>
                             <p id="password-error" class="error-msg"></p>
+                             <p id="form-error" class="error-msg"></p>
                             <div class="carousel__btn-wrap" >
                                 <button class="back-link"><i class="fas fa-chevron-left"></i> Back</button>
                                 <button id="create-account-btn" class="btn form-submit__btn">Create account</button>
@@ -81,15 +82,18 @@
             </form>
                         <div class="carousel-item">
                             <h3>Step 3 of 3 - Payment profile</h3>
-                            <p>Press the button below to enter your credit card details. Even though you may see a price, you will not be charged anything today, and we will notify.  You will only be charged 2 weeks after Niche launches, and we'll let you know well in advance!</p>
+                            <p>Press the button below to enter your credit card details. You will only be charged 2 weeks after Niche launches, and we'll be sure to inform you before your first charge.</p>
+                            <p><b>Note:</b> Use the same email as you did when you signed up </p>
                             <form action="/charge" method="post" class="payment">
                                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                         data-key="<%= settings.publishable_key %>"
-                                        data-description="Nice Subscription"
+                                        data-description="Niche Subscription"
                                         data-amount="2900"
                                         data-locale="auto"></script>
                             </form>
                             <img class='stripe-img' src="/images/stripe-payment-logo.png" alt="" srcset="">
+                            <p><b>30-day money back guarantee.</b></p>
+                            <p>Your card details are encrypted and kept confidential.</p>
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

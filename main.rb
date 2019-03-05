@@ -1,7 +1,7 @@
      
 require 'sinatra'
 # require 'sinatra/reloader'
-# require 'pry'
+require 'pry'
 require 'active_record'
 require 'pg'
 require 'stripe'
@@ -181,9 +181,7 @@ get "/thank-you/:id" do
   erb :thank_you
 end
 
-post '/webhook/activate/' do
-  event_json = JSON.parse(request.body.read)
-end
+
 
 error Stripe::CardError do
   env['sinatra.error'].message
