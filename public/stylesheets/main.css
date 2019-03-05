@@ -506,6 +506,7 @@ h3 {
     bottom: -3rem;
     z-index: 2;
     right: 0;
+    pointer-events: none;
 }
 
 .triangle {
