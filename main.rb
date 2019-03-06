@@ -75,6 +75,7 @@ post '/create-account' do
     @user.last_name = params[:last_name]
     @user.email = params[:email]
     @user.password = params[:password]
+    @user.phone_number = params[:phone_number]
     @user.avatar = "#{@user.first_name[0].upcase}#{@user.last_name[0].upcase}"
     @user.save
     if @user.save
